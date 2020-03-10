@@ -8,6 +8,14 @@ use Auth;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['show', 'create', 'store']
+        ]);
+    }
+
     //用户注册表单页
     public function create()
     {
@@ -42,6 +50,7 @@ class UsersController extends Controller
     //用户编辑页面
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
