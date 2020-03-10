@@ -1,0 +1,11 @@
+#打开tinker
+
+--php artisan tinker
+
+#数据库迁移
+
+--php artisan migrate
+
+#数据库回滚
+
+--php artisan migrate:rollback
