@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -15,9 +16,8 @@ class UsersTableSeeder extends Seeder
         User::insert($users->makeVisible(['password', 'remember_token'])->toArray());
 
         $user = User::find(1);
-        $user->name = 'Datou';
-        $user->email = 'Datou@qq.com';
-        $user->is_admin = true;
+        $user->name = 'datou';
+        $user->email = 'datou@qq.com';
         $user->save();
     }
 }
