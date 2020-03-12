@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\status;
 
 class StatusesController extends Controller
 {
@@ -22,6 +23,15 @@ class StatusesController extends Controller
             'content' => $request['content']
         ]);
         session()->flash('success', '发布成功！');
+        return redirect()->back();
+    }
+
+    //这里我们使用的是『隐性路由模型绑定』功能，Laravel 会自动查找并注入对应 ID 的实例对象 $status，如果找不到就会抛出异常
+    public function destroy(Status $status)
+    {
+        $this->authorize('destroy', $status);//做删除授权的检测，不通过会抛出 403 异常。
+        $status->delete();
+        session()->flash('success', '微博已被成功删除！');
         return redirect()->back();
     }
 }
